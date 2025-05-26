@@ -1,6 +1,4 @@
-const SNAPS_PER_SECOND = 0; // 0 means no limit
 const STEP_DELAY = 10; // 10ms
-const SHORTCUT_NAME = "🔥";
 
 const TAKE_SNAP = 0;
 const CONFIRM_SNAP = 1;
@@ -69,3 +67,14 @@ function loopNextStep() {
 }
 
 loopNextStep();
+
+
+// -- Settings -- //
+
+// Changes the number of snaps per second which the bot will send to each person
+// Use 0 to not limit the snaps per second
+const SNAPS_PER_SECOND = 0;
+
+// The name of the shortcut to use
+const SHORTCUT_NAME = "spam";
+
