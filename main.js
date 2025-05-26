@@ -1,8 +1,7 @@
-const snapsPerSecond = 0; // 0 means no limit
-const checkInterval = 10; // 10ms
-const targetShortcut = "🔥";
+const SNAPS_PER_SECOND = 0; // 0 means no limit
+const STEP_DELAY = 10; // 10ms
+const SHORTCUT_NAME = "🔥";
 
-const WAIT = -1;
 const TAKE_SNAP = 0;
 const CONFIRM_SNAP = 1;
 const SELECT_SHORTCUT = 2;
@@ -10,6 +9,7 @@ const SELECT_PEOPLE = 3;
 const CLICK_SEND = 4;
 
 var lastStep = CLICK_SEND;
+var lastSnapTime = Date.now();
 
 function nextStep() {
 	// take snap
@@ -41,7 +41,7 @@ function nextStep() {
 	// select shortcut
 	let shortcuts = document.getElementsByClassName("c47Sk");
 	for (let i = 0; i < shortcuts.length; ++i) {
-		if (shortcuts[i].innerHTML == targetShortcut) {
+		if (shortcuts[i].innerHTML == SHORTCUT_NAME) {
 			lastStep = SELECT_SHORTCUT;
 			shortcuts[i].click();
 			return;
@@ -58,8 +58,14 @@ function nextStep() {
 }
 
 function loopNextStep() {
+	let delay = STEP_DELAY;
 	nextStep();
-	setTimeout(loopNextStep, 10);
+	if (lastStep == CLICK_SEND && SNAPS_PER_SECOND != 0) {
+		let dt = Date.now() - lastSnapTime;
+		delay = 1000/SNAPS_PER_SECOND - dt;
+		lastSnapTime = Date.now();
+	}
+	setTimeout(loopNextStep, delay);
 }
 
 loopNextStep();
