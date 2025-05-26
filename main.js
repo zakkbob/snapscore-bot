@@ -1,5 +1,6 @@
-const STEP_DELAY = 10; // 10ms
-const SHORTCUT_NAME = "🔥";
+const snapsPerSecond = 0; // 0 means no limit
+const checkInterval = 10; // 10ms
+const targetShortcut = "🔥";
 
 const WAIT = -1;
 const TAKE_SNAP = 0;
@@ -21,16 +22,15 @@ function nextStep() {
 
 	// click send
 	elements = document.getElementsByClassName("TYX6O");
-	if (elements.length != 0 && lastStep != CLICK_SEND) {
+	if (elements.length != 0) {
 		lastStep = CLICK_SEND;
 		elements[0].click();
 		return;
 	}	
-
 	// select people
 	let shortcutsEl = document.getElementsByClassName("GRZ27"); // check if 'Shortcuts' text is present
 	let people = document.getElementsByClassName("Ewflr");
-	if (shortcutsEl.length != 0 && shortcutsEl[0].innerText == "Shortcuts" && people.length != 0 && lastStep != SELECT_PEOPLE) {
+	if (shortcutsEl.length != 0 && shortcutsEl[0].innerText == "Shortcuts" && people.length != 0) {
 		for (let i = 0; i < people.length; ++i) {
 			setTimeout(()=>{people[i].click();},1);
 		}
@@ -40,13 +40,11 @@ function nextStep() {
 
 	// select shortcut
 	let shortcuts = document.getElementsByClassName("c47Sk");
-	if (lastStep != SELECT_SHORTCUT) {
-		for (let i = 0; i < shortcuts.length; ++i) {
-			if (shortcuts[i].innerHTML == SHORTCUT_NAME) {
-				lastStep = SELECT_SHORTCUT;
-				shortcuts[i].click();
-				return;
-			}
+	for (let i = 0; i < shortcuts.length; ++i) {
+		if (shortcuts[i].innerHTML == targetShortcut) {
+			lastStep = SELECT_SHORTCUT;
+			shortcuts[i].click();
+			return;
 		}
 	}
 
@@ -57,12 +55,11 @@ function nextStep() {
 		elements[0].click();
 		return;
 	}
-
 }
 
 function loopNextStep() {
 	nextStep();
-	setTimeout(loopNextStep, step_delay);
+	setTimeout(loopNextStep, 10);
 }
 
 loopNextStep();
