@@ -4,13 +4,14 @@ A bot which increases your snap score
 
 ## Instructions
 
-1. Create a shortcut named 'Spam' containing the people to spam
+1. Create a shortcut containing the people to spam, choose any emoji
 2. Login to [Snapchat Web](https://www.snapchat.com/web/)
 3. Open the developer console (Press Ctrl+Shift+I)
 4. Type 'allow pasting' and press enter
 5. Paste in the code found in [main.js](https://raw.githubusercontent.com/zakkbob/snapscore-bot/refs/heads/main/main.js)
-6. Close the console
-
+6. Change the SHORTCUT_NAME setting to the emoji you chose earlier
+7. Change SNAPS_PER_SECOND if you want to
+8. Press enter and close the console
 
 ## Options
 
