@@ -76,5 +76,5 @@ loopNextStep();
 const SNAPS_PER_SECOND = 0;
 
 // The name of the shortcut to use
-const SHORTCUT_NAME = "spam";
+const SHORTCUT_NAME = "🔥";
 
