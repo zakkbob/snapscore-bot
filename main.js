@@ -7,7 +7,6 @@ const SELECT_PEOPLE = 3;
 const CLICK_SEND = 4;
 
 var lastStep = CLICK_SEND;
-var lastSnapTime = Date.now();
 
 function nextStep() {
 	// take snap
@@ -58,12 +57,13 @@ function nextStep() {
 function loopNextStep() {
 	let delay = STEP_DELAY;
 	nextStep();
+    
 	if (lastStep == CLICK_SEND && SNAPS_PER_SECOND != 0) {
-		let dt = Date.now() - lastSnapTime;
-		delay = 1000/SNAPS_PER_SECOND - dt;
-		lastSnapTime = Date.now();
+        delay = 1000/SNAPS_PER_SECOND;
 	}
+        
 	setTimeout(loopNextStep, delay);
+    return;
 }
 
 loopNextStep();
@@ -72,9 +72,8 @@ loopNextStep();
 // -- Settings -- //
 
 // Changes the number of snaps per second which the bot will send to each person
-// Use 0 to not limit the snaps per second
-const SNAPS_PER_SECOND = 0;
+// Use 0 to not limit the snaps per second, will probably make snapchat lag
+const SNAPS_PER_SECOND = 2;
 
 // The name of the shortcut to use
 const SHORTCUT_NAME = "🔥";
-
